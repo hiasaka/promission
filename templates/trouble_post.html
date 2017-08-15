@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <form method="POST" action="/trouble.html?md=POST&nid={{ v.id }}">
+    {% csrf_token %}
+        <p><input type="text" name="title" value="{{ v.title }}"></p>
+    <p><textarea name="detail">{{ v.detail }}</textarea></p>
+        <p>{{ v.ctime|date:'Y-m-d H-m-s' }}</p>
+    <p><input type="submit" value="提交"></p>
+    </form>
+
+
+
+{% endblock%}

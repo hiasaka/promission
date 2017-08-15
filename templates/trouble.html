@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <p>欢迎登录:{{ request.session.userinfo.username }}</p>
+    {% if 'ADD' in request.permission_code_list %}
+        <p><a href="/trouble.html?md=ADD">添加</a></p>
+    {% endif %}
+    <table border="1px">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>title</th>
+            <th>detail</th>
+            <th>status</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in all_list %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.title }}</td>
+                <td>{{ i.detail }}</td>
+                <td>{{ i.status }}</td>
+                {% if 'DEL' in request.permission_code_list %}
+                    <td><a href="/trouble.html?md=DEL&nid={{ i.id }}">删除</a></td>
+                {% endif %}
+                            {% if 'POST' in request.permission_code_list %}
+                    <td><a href="/trouble.html?md=POST&nid={{ i.id }}">编辑</a></td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
